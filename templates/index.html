@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+	<title> A* Algorithm </title>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZHksbwZ4w1JsRAHm3ZtdykkxiNwtJgkk&callback=initMap&libraries=geometry"></script>
+	<script async defer src="{{ url_for('static', filename='jquery.js') }}"></script>
+</head>
+<body>
+
+
+	<div class="container">
+		<div class="navbar"> 
+
+			<div class="nav-header">
+				<span class="header">A* Algorithm</span>	
+			</div>
+			
+			<div class="controller-container">
+
+				<div class ="controller">
+					<span class="marker-header">Points List</span>
+
+
+					<ol class="list" id="pointList">
+
+					</ol>
+
+					<button id="clear_point_button" onclick="clearMarker()" class="controller-button">Clear</button>
+				</div>
+
+				<div class ="controller">
+					<span class="marker-header">Paths List</span>
+
+					<ul class="list" id="pathList">
+					</ul>
+
+					<button id="clearButton" class="controller-button" onclick="clearPath()">Clear</button>
+				</div>
+
+				<div class ="controller">
+
+					<span class="marker-header">Add Path</span>
+					
+					<div class="path-controller">
+
+						<select id="path-1" class="path-option">
+						</select>
+
+						<select id="path-2" class="path-option">
+						</select>
+
+						<button id="addPathButton" class="controller-button">Add Path</button>
+					</div>
+
+					
+				</div>
+
+				<button class="clear-button" id="clearAllButton" onclick="clearAll()">Clear All</button>
+
+				<button class="clear-button" id="clearAllButton" onclick="generateDistanceMatrix()">Find Path</button>
+
+			 </div>
+
+		</div>
+
+		<div id="map" class="mapCanvas"> 
+		</div>
+	
+	</div>
+
+	<script type="text/javascript" src="{{ url_for('static', filename='map.js') }}"></script>
+</body>
+</html>
