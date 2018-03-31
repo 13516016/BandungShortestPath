@@ -58,10 +58,22 @@
 
 					
 				</div>
+				<button class="clear-button" id="clearAllButton" onclick="clearAll()">Clear All Points and Paths</button>
 
-				<button class="clear-button" id="clearAllButton" onclick="clearAll()">Clear All</button>
+				<div class="controller" style="margin-top: 50px;text-align: center" >
+					<span class="marker-header" style="margin-bottom: 20px; display: block;">Where do you want to go?</span>
 
-				<button class="clear-button" id="clearAllButton" onclick="generateDistanceMatrix()">Find Path</button>
+					<div style="margin-bottom: 10px; display: grid; grid-template-columns: repeat(2,1fr);">
+						
+						<span>From 	: </span> <select id="source-select" class="source-dest-option"></select>
+						<span>To :</span><select id="destination-select" class="source-dest-option"></select>
+
+					</div>
+
+						<button class="clear-button" onclick="getShortestPath()" style="min-width: 200px; color: white; background-color: green; border-width: 1; border-color: #363651; padding: 10px;">Find Path</button>
+				</div>
+
+				<!-- <button class="clear-button" id="getShortestPath" onclick="getShortestPath()">Find Path</button> -->
 
 			 </div>
 

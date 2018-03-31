@@ -9,8 +9,23 @@ span {
 	color:#FFFFFF;
 }
 button {
-	background: #ffffff;
+	background: #302550;
+	color:#FFFFFF;
 	border-width: 0;
+	 box-shadow: 0px 0px 1px #6e6ed8;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 8px;
+
+	font-weight: 500;
+}
+
+button:hover{
+	background: #302550;
+	color:#FFFFFF;
+	border-width: 0;
+	box-shadow: 0px 0px 3px #6e6ed8;
 	padding: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -45,12 +60,11 @@ button {
 }
 
 .nav-header{
-	text-align: left;
+	text-align: right;
 	font-size: 28px;
 	font-weight: 600;
 	padding: 20px;
 	margin-bottom: 10px;
-	width:100%;
 	background: #6e6ed8;
 }
 
@@ -85,8 +99,8 @@ button {
 }
 
 .path-controller {
-	display:grid ;
-	grid-template-columns: repeat(5,1fr);
+	display:grid;
+	grid-template-columns: repeat(3,1fr);
 }
 
 #addPathButton {
@@ -94,10 +108,14 @@ button {
 	grid-column: 4/6;
 }
 
-#clearAllButton{
-	width:100%;
-}
 
 #clearAllButton{
 	width:100%;
+	padding: 10px;
+	background-color: #BB0000;
+}
+
+.source-dest-option {
+	min-width: 100px;
+	max-width: 100px;
 }

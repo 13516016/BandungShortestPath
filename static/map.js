@@ -1,5 +1,9 @@
 var map;
+
+// Markers are Points
 var markers = [];
+
+// Paths are Polylines
 var paths = [];
 var distances = [];
 var adjacency_matrix = [];
@@ -222,6 +226,8 @@ var map_style = [
 var addPathButton = document.getElementById('addPathButton');
 var selectPath_1 = document.getElementById('path-1');
 var selectPath_2 = document.getElementById('path-2');
+var selectSource = document.getElementById('source-select');
+var selectDestination = document.getElementById('destination-select');
 var pointList = document.getElementById('pointList');
 var pathList = document.getElementById('pathList');
 
@@ -323,19 +329,31 @@ function updatePathSelection(){
     option2.value = markers[i].getLabel();
     option2.text = markers[i].getLabel().toString();
 
-    console.log(option1.text);
-    console.log(option2.text);
+    var option3 = document.createElement('option');
+    option3.value= markers[i].getLabel();
+    option3.text=markers[i].getLabel().toString();
+
+    var option4 = document.createElement('option');
+    option4.value = markers[i].getLabel();
+    option4.text = markers[i].getLabel().toString();
+
 
     selectPath_1.add(option1);
     selectPath_2.add(option2);
+    selectSource.add(option3);
+    selectDestination.add(option4);
   }
 }
 
 function updatePoints(){
   // clear select point
-  document.getElementById("path-1").options.length = 0;
-  document.getElementById("path-2").options.length = 0;
+  selectPath_1.options.length = 0;
+  selectPath_2.options.length = 0;
+  selectSource.options.length = 0;
+  selectDestination.options.length = 0;
+
   // Clear pointlist
+
 
   while ( pointList.firstChild ) {
     pointList.removeChild( pointList.firstChild );
@@ -357,6 +375,7 @@ function addPath(marker1, marker2){
     strokeOpacity: 1,
     strokeWeight: 2,
     map: map,
+    
   });
 
   try{
@@ -478,6 +497,36 @@ function findPath(){
 
 }
 
+function getMarkerIdxByLabel(label){
+  for (var i = markers.length - 1; i >= 0; i--) {
+    if (markers[i].getLabel() == label){
+      return i;
+    } 
+  }
+}
+
+
+function getShortestPath(source, destination){
+
+  json_data = {
+    "source_point" : source,
+    "destination_point" : destination,
+    "adjacency_matrix" : adjacency_matrix,
+    "distance_matrix" : distances,
+  }
+
+  $.ajax({
+    url: "/get-shortest-path/", 
+    data : JSON.stringify(json_data),
+    dataType: 'json',
+    type: 'post',
+    contentType: 'application/json',
+    success: function(result){
+          console.log(result);
+      }}); 
+}
+
+
 addPathButton.onclick = function(event){
   label1 = selectPath_1.options[selectPath_1.selectedIndex].value;
   label2 = selectPath_2.options[selectPath_2.selectedIndex].value;
@@ -486,3 +535,6 @@ addPathButton.onclick = function(event){
 
   addPath(marker1,marker2);
 }
+
+
+
