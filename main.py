@@ -5,19 +5,37 @@ import sys
 import threading
 
 app = Flask(__name__)
+debug = True
 
 
-@app.route('/get-shortest-path/', methods = ['POST','GET'])
+@app.route('/get-shortest-path/', methods = ['POST'])
 def getShortestPath():
 	if request.method == 'POST':
 		content = request.get_json()
-		
+
+		source = content['source_point']
+		destination = content['destination_point']
 		adjacency_matrix = content['adjacency_matrix']
 		distance_matrix = content['distance_matrix']
+		
+		if (debug):
+			print(source)
+			print(destination)
+			
+			for adj in adjacency_matrix:
+				print(adj)	
 
+			print()
 
+			for distance in distance_matrix:
+				print(distance)
 
-	return "OK"
+		# IMPLEMENT IN **a_star.py** file
+		
+		# solution = a_star(source,destination,adjacency_matrix, distance_matrix)
+		# return JSON.parse(solution)
+		
+		return "NICE"
 
 
 @app.route('/',methods = ['POST', 'GET'])
@@ -29,7 +47,7 @@ def login():
    	return render_template('index.html')
 
 if __name__ =='__main__':
-    app.debug=True
+    app.debug=debug
     app.run()
 	
 	

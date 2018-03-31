@@ -224,10 +224,12 @@ var map_style = [
 ]
 
 var addPathButton = document.getElementById('addPathButton');
+var getPathButton = document.getElementById('getPathButton');
 var selectPath_1 = document.getElementById('path-1');
 var selectPath_2 = document.getElementById('path-2');
 var selectSource = document.getElementById('source-select');
 var selectDestination = document.getElementById('destination-select');
+var pointList = document.getElementById('pointList');
 var pointList = document.getElementById('pointList');
 var pathList = document.getElementById('pathList');
 
@@ -498,11 +500,13 @@ function findPath(){
 }
 
 function getMarkerIdxByLabel(label){
-  for (var i = markers.length - 1; i >= 0; i--) {
+  
+  for (var i = markers.length-1; i >= 0; i--) {
     if (markers[i].getLabel() == label){
       return i;
     } 
   }
+
 }
 
 
@@ -518,12 +522,14 @@ function getShortestPath(source, destination){
   $.ajax({
     url: "/get-shortest-path/", 
     data : JSON.stringify(json_data),
-    dataType: 'json',
     type: 'post',
-    contentType: 'application/json',
+    contentType: 'application/json', 
     success: function(result){
           console.log(result);
-      }}); 
+    }
+
+  });
+
 }
 
 
@@ -536,5 +542,14 @@ addPathButton.onclick = function(event){
   addPath(marker1,marker2);
 }
 
+getPathButton.onclick = function(event){
+  from_label = selectSource.options[selectSource.selectedIndex].value;
+  to_label = selectDestination.options[selectDestination.selectedIndex].value;
 
+
+  source = getMarkerIdxByLabel(from_label);
+  destination = getMarkerIdxByLabel(to_label);
+
+  getShortestPath(source,destination);
+}
 
