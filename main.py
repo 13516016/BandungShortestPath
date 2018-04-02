@@ -2,7 +2,7 @@ from flask import Flask
 from flask import redirect, url_for, request, render_template
 import webview
 import sys
-import threading
+import json
 
 app = Flask(__name__)
 debug = True
@@ -34,8 +34,9 @@ def getShortestPath():
 		
 		# solution = a_star(source,destination,adjacency_matrix, distance_matrix)
 		# return JSON.parse(solution)
-		
-		return "NICE"
+
+		example  = [i for i,_ in enumerate(adjacency_matrix[0])]
+		return json.dumps(example)
 
 
 @app.route('/',methods = ['POST', 'GET'])

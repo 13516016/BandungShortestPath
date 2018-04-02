@@ -16,7 +16,7 @@
 		<div class="navbar"> 
 
 			<div class="nav-header">
-				<span class="header">A* Algorithm</span>	
+				<span class="header" style="color: #FFFFFF;">A* Algorithm</span>	
 			</div>
 			
 			<div class="controller-container">
@@ -26,7 +26,6 @@
 
 
 					<ol class="list" id="pointList">
-
 					</ol>
 
 					<button id="clear_point_button" onclick="clearMarker()" class="controller-button">Clear</button>
@@ -35,8 +34,8 @@
 				<div class ="controller">
 					<span class="marker-header">Paths List</span>
 
-					<ul class="list" id="pathList">
-					</ul>
+					<ol class="list" id="pathList">
+					</ol>
 
 					<button id="clearButton" class="controller-button" onclick="clearPath()">Clear</button>
 				</div>
@@ -49,6 +48,9 @@
 
 						<select id="path-1" class="path-option">
 						</select>
+
+
+						"<li>" + path.length + "</li>";
 
 						<select id="path-2" class="path-option">
 						</select>

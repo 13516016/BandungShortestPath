@@ -230,7 +230,6 @@ var selectPath_2 = document.getElementById('path-2');
 var selectSource = document.getElementById('source-select');
 var selectDestination = document.getElementById('destination-select');
 var pointList = document.getElementById('pointList');
-var pointList = document.getElementById('pointList');
 var pathList = document.getElementById('pathList');
 
 function initMap() {
@@ -355,8 +354,6 @@ function updatePoints(){
   selectDestination.options.length = 0;
 
   // Clear pointlist
-
-
   while ( pointList.firstChild ) {
     pointList.removeChild( pointList.firstChild );
   }
@@ -495,10 +492,6 @@ function updateAdjacencyMatrix(){
 
 }
 
-function findPath(){
-
-}
-
 function getMarkerIdxByLabel(label){
   
   for (var i = markers.length-1; i >= 0; i--) {
@@ -524,14 +517,33 @@ function getShortestPath(source, destination){
     data : JSON.stringify(json_data),
     type: 'post',
     contentType: 'application/json', 
+
     success: function(result){
-          console.log(result);
+          shortest_path = JSON.parse(result);
+          console.log(shortest_path);
+          showShortestPath(shortest_path);
     }
 
   });
 
 }
 
+function showShortestPath(shortest_path){
+
+    for (var i = 0; i < shortest_path.length-1; i++) {
+      var poly = new google.maps.Polyline({
+        strokeColor: 'green',
+        strokeOpacity: 1,
+        strokeWeight: 3,
+        map: map,
+      });
+
+      var path = [markers[i].getPosition(),markers[i+1].getPosition()];
+      poly.setPath(path);
+
+    } 
+
+}
 
 addPathButton.onclick = function(event){
   label1 = selectPath_1.options[selectPath_1.selectedIndex].value;
@@ -545,11 +557,9 @@ addPathButton.onclick = function(event){
 getPathButton.onclick = function(event){
   from_label = selectSource.options[selectSource.selectedIndex].value;
   to_label = selectDestination.options[selectDestination.selectedIndex].value;
-
-
   source = getMarkerIdxByLabel(from_label);
   destination = getMarkerIdxByLabel(to_label);
 
   getShortestPath(source,destination);
 }
-
+ 
